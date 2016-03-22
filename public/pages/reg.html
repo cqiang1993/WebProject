@@ -47,31 +47,13 @@
                         <span class="text-danger" ng-show="(userform.repassword.$dirty&&user.password!=user.repassword)">密码和确认密码不一致</span>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="radiobox" class="col-sm-offset-2 col-sm-2 control-label text-right">选择您的注册身份</label>
-                    <div class="input-group col-sm-4">
-                        <div class="radio" id="radiobox" ng-required>
-                            <label>
-                                <input type="radio" name="optionsRadios" id="teacher" ng-model="user.teacher"
-                                       value="option2">
-                                老师
-                            </label>
-                            <label>
-                                <input type="radio" name="optionsRadios" id="student" ng-model="user.student"
-                                       value="option1"> 学生
-                            </label>
-                        </div>
-                        <div class="help-block col-sm-4" ng-show="userform.radiobox.$dirty && userform.radiobox.$invalid">
-                            <span class="text-danger" ng-show="userform.radiobox.$error.required">请选择您的注册身份</span>
-                        </div>
+
+                    <div class="col-sm-offset-5 col-sm-1" style="margin-top: 50px">
+                        <button type="submit" class="btn btn-lg btn-primary btn-enter" ng-disabled="userform.$invalid || user.password!=user.repassword">注册</button>
                     </div>
-                </div>
+
             </form>
-        </div>
-        <div class="panel-footer" >
-            <div class="col-sm-offset-5 col-sm-1" style="margin-top: 50px">
-                <button type="submit" class="btn btn-lg btn-primary btn-enter" ng-disabled="userform.$invalid || user.password!=user.repassword">注册</button>
-            </div>
+            <div class="panel-footer" ></div>
         </div>
     </div>
 </div>

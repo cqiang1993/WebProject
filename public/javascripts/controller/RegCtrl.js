@@ -1,4 +1,4 @@
-angular.module('classApp').controller('RegCtrl',function($scope,$http){
+angular.module('classApp').controller('RegCtrl',function($scope,$http,$location){
     $scope.user = {};
     $scope.save = function(){
         $http({
