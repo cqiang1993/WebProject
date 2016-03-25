@@ -6,6 +6,25 @@
     <link rel="stylesheet" href="./vendor/bootstrap/dist/css/bootstrap.css">
 </head>
 <body style="margin-top:70px">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavBarCtrl">
+    <div class="navbar-header">
+        <a href="#/" class="navbar-brand">备课平台</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li ng-show="me" ng-class="{active:isActive('/home')}"><a href="#/home">首页</a></li>
+        <li ng-hide="me" ng-class="{active:isActive('/reg')}"><a href="#/reg">注册</a></li>
+        <li ng-hide="me" ng-class="{active:isActive('/login')}"><a href="#/login">登录</a></li>
+    </ul>
+    <ul class="nav-navbar-nav navbar-rigth" ng-show="me">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+               role="button">欢迎{{me.username}}<span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-menu-left">
+                <li><a href="#" ng-click="logout()">退出</a> </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 <div class="contariner">
     <div class="row" ng-view></div>
 </div>
@@ -16,4 +35,6 @@
 <script src="./vendor/angular-route/angular-route.js"></script>
 <script src="./javascripts/app.js"></script>
 <script src="./javascripts/controller/RegCtrl.js"></script>
+<script src="./javascripts/controller/LoginCtrl.js"></script>
+<script src="./javascripts/controller/NavBarCtrl.js"></script>
 </html>

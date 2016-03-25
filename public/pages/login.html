@@ -1,8 +1,8 @@
 <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading">登录</div>
+        <form role="form" name="userform" class="form-horizontal" ng-submit="login()">
         <div class="panel-body">
-            <form role="form" name="userform" class="form-horizontal" ng-submit="save()">
                 <div class="form-group row" ng-class="{'has-error':userform.username.$dirty&&userform.username.$invalid}">
                     <label for="username" class="col-sm-offset-2 col-sm-2 control-label text-right">用户名</label>
                     <div class="input-group col-sm-4">
@@ -31,15 +31,12 @@
                         <span class="text-danger" ng-show="userform.password.$error.maxlength">长度不能大于12位</span>
                     </div>
                 </div>
-            </form>
+                <div class="col-sm-offset-5 col-sm-1" style="margin-top: 50px">
+                    <button type="submit" class="btn btn-lg btn-primary btn-enter">登录</button>
+                </div>
+                <div class="panel-footer" >
+                </div>
         </div>
-        <div class="panel-footer" >
-            <div class="col-sm-offset-5 col-sm-1" style="margin-top: 50px">
-                <button type="submit" class="btn btn-lg btn-primary btn-enter">登录</button>
-            </div>
-            <div class="col-sm-1" style="margin-top: 50px">
-                <button type="" class="btn btn-lg btn-primary btn-enter">注册</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

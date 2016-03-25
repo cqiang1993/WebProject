@@ -12,12 +12,17 @@ angular.module('classApp',['ngRoute'])
         }).otherwise({
             redirectTo:'/'
         });
+    }).run(function($rootScope,$location,$http){
+        $http({
+            url:'/users/validate',
+            method:'GET'
+        }).success(function(user){
+            $rootScope.me = user;
+            $location.path('/');
+        }).error(function(data){
+            $location.path('/login');
+        });
     });
-angular.module('classApp')
-    .controller('HomeCtrl',function(){
+angualr.module('classApp').controller('HomeCtrl',function(){
 
-    }).controller('RegCtrl',function(){
-
-    }).controller('LoginCtrl',function(){
-
-    });
+});

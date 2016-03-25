@@ -11,4 +11,4 @@ angular.module('classApp').controller('RegCtrl',function($scope,$http,$location)
             $location.path('/reg');
         })
     }
-})
+});
