@@ -1,0 +1,159 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <div class="pull-left">
+                <button class="btn btn-success" add-exercise>增加</button>
+                <button class="btn btn-danger" batch-delete-exers >批量删除</button>
+            </div>
+            <div class="pull-right">
+                <input type="text" placeholder="请输入关键字" name="keyword" ng-model="keytword" ng-change="filter()"/>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-repsonsive">
+                <thead>
+                <tr>
+                    <td class="text-center"><input type="checkbox" select-all-exers id="selectAllExers"/></td>
+                    <td>题干</td>
+                    <td>A</td>
+                    <td>B</td>
+                    <td>C</td>
+                    <td>D</td>
+                    <td>答案</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="exer in exers track by $index">
+                    <td><input type="checkbox" data-id="{{exer._id}}" name="chkItem" select-exer-item/></td>
+                    <td>{{exer.title}}</td>
+                    <td>{{exer.A}}</td>
+                    <td>{{exer.B}}</td>
+                    <td>{{exer.C}}</td>
+                    <td>{{exer.D}}</td>
+                    <td>{{exer.Answer}}</td>
+                    <td>{{exer.Status}}</td>
+                    <td class="text-center">
+                        <button data-index="{{$index}}" class="btn btn-primary" edit-exercise>编辑</button>
+                        <button data-index="{{$index}}" class="btn btn-success" view-exercise>查看</button>
+                        <button data-index="{{$index}}" class="btn btn-danger" delete-exercise>删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer text-center">
+            <ul class="pagination pagination-md">
+                <li><span>上一页</span></li>
+                <li ng-repeat="page in pages"><span>{{page}}</span></li>
+                <li><span>下一页</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 modal-title>添加习题</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" role="form" class="form-horizontal"><input type="text" class="form-control" ng-model="exer._id" placeholder="ID"/>
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">题干</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exer.title" id="title" placeholder="请输入题干"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="A" class="col-sm-2 control-label">选项A</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exer.A" id="A" placeholder="选项A"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="B" class="col-sm-2 control-label">选项B</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exer.B" id="B" placeholder="选项B"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="C" class="col-sm-2 control-label">选项C</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exer.C" id="C" placeholder="选项C"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="D" class="col-sm-2 control-label">选项D</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exer.D" id="D" placeholder="选项D"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Answer" class="col-sm-2 control-label">答案</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exer.Answer" id="Answer" placeholder="Answer"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Status" class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exer.Status" id="Status" placeholder="状态"/>
+                        </div>
+                    </div>
+                    未发布：wait，发布：online
+                </form>
+            </div>
+            <div class="modal-footer clearfix">
+                <button class="btn btn-success" ng-click="save()" data-dismiss="modal">确定</button>
+                <button class="btn btn-default"  data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 modal-title>查看习题</h4>
+            </div>
+            <div class="modal-body">
+                <div class="caption">
+                    <h3>题干：{{exer.title}}</h3><br>
+                    <h3>选项A：{{exer.A}}</h3><br>
+                    <h3>选项B：{{exer.B}}</h3><br>
+                    <h3>选项C：{{exer.C}}</h3><br>
+                    <h3>选项D：{{exer.D}}</h3><br>
+                    <h3>答案：{{exer.Answer}}</h3><br>
+                    <h3>状态：{{exer.Status}}</h3>
+                </div>
+            </div>
+            <div class="modal-footer clearfix">
+                <button class="btn btn-default"  data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 modal-title>确认删除</h4>
+            </div>
+            <div class="modal-body">
+                请问，你是否确认要删除{{exer.title}}
+            </div>
+            <div class="modal-footer clearfix">
+                <button class="btn btn-danger" ng-click="delete()" data-dismiss="modal">删除</button>
+                <button class="btn btn-default"  data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

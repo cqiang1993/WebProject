@@ -47,13 +47,12 @@
                         <span class="text-danger" ng-show="(userform.repassword.$dirty&&user.password!=user.repassword)">密码和确认密码不一致</span>
                     </div>
                 </div>
-
-                    <div class="col-sm-offset-5 col-sm-1" style="margin-top: 50px">
+                <div class="panel-footer clearfix" >
+                    <div class="col-sm-offset-5 col-sm-1">
                         <button type="submit" class="btn btn-lg btn-primary btn-enter" ng-disabled="userform.$invalid || user.password!=user.repassword">注册</button>
                     </div>
-
+                </div>
             </form>
-            <div class="panel-footer" ></div>
         </div>
     </div>
 </div>

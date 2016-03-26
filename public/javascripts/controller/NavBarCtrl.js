@@ -11,6 +11,6 @@ angular.module('classApp').controller('NavBarCtrl',function($rootScope,$scope,$h
             })
         };
         $scope.isActive = function(path){
-            return path == $location.path;
+            return path == $location.path();
         }
     });

@@ -1,14 +1,19 @@
 angular.module('classApp',['ngRoute'])
     .config(function($routeProvider,$locationProvider){
         $routeProvider.when('/',{
-            templateUrl:'pages/home.html',
-            controller:'HomeCtrl'
+            templateUrl:'pages/home.html'
         }).when('/reg',{
             templateUrl:'pages/reg.html',
             controller:'RegCtrl'
         }).when('/login',{
             templateUrl:'pages/login.html',
             controller:'LoginCtrl'
+        }).when('/student',{
+            templateUrl:'pages/student.html',
+            controller:'StuCtrl'
+        }).when('/exercise',{
+            templateUrl:'pages/exercise.html',
+            controller:'ExerCtrl'
         }).otherwise({
             redirectTo:'/'
         });
@@ -23,6 +28,3 @@ angular.module('classApp',['ngRoute'])
             $location.path('/login');
         });
     });
-angualr.module('classApp').controller('HomeCtrl',function(){
-
-});
