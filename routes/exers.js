@@ -38,6 +38,16 @@ router.get('/exerlist',function(req,res){
     })
 });
 
+router.get('/exerlist_online',function(req,res){
+    models.Exercise.find({Status:"online"},function(err,exers){
+        if(err){
+            res.status(500).json({msg:err});
+        }else{
+            res.status(200).json(exers);
+        }
+    })
+});
+
 router.post('/deleteExer',function(req,res){
     models.Exercise.remove({_id:req.body._id},function(err,result){
         if(err){

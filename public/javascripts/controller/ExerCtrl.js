@@ -8,6 +8,7 @@ angular.module('classApp').controller('ExerCtrl',function($rootScope,$scope,$htt
     }).error(function(){
 
     });
+
     $scope.save = function(){
             $http({
                 url:'/exers/addExer',
