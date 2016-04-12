@@ -48,6 +48,26 @@ router.get('/exerlist_online',function(req,res){
     })
 });
 
+router.post('/exerdetail_online',function(req,res){
+    models.Exercise.findOne({_id:req.body._id},function(err,exers){
+        if(err){
+            res.status(500).json({msg:err});
+        }else{
+            res.status(200).json(exers);
+        }
+    })
+});
+
+router.post('/changeExer_online',function(req,res){
+    models.Exercise.update({_id:req.body._id},{$set:{Status:"online"}},function(err,result){
+        if(err){
+            res.status(500).json({msg:err});
+        }else{
+            res.status(200).json(result);
+        }
+    })
+});
+
 router.post('/deleteExer',function(req,res){
     models.Exercise.remove({_id:req.body._id},function(err,result){
         if(err){
@@ -75,6 +95,23 @@ router.post('/batchDeleteExers',function(req,res){
     });
 });
 
-
+router.post('/submit',function(req,res){
+    models.Detail.findOne({questionId:req.body.questionId,stuId:req.body.stuId},function(err,exer){
+        if(err){
+            res.status(500).json({msg:err});
+        }else if(exer){
+                res.status(201).json({msg:"此题已完成",Answer:exer.Answer});
+        }else{
+            new models.Detail({questionId:req.body.questionId,title:req.body.title,stuId:req.body.stuId,Answer:req.body.Answer}).save(function(err,detail){
+                if(err){
+                    console.log(err);
+                    res.status(500).json({msg:err});
+                }else{
+                    res.status(200).json(detail);
+                }
+            })
+        }
+})
+});
 
 module.exports = router;

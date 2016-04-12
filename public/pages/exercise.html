@@ -19,7 +19,6 @@
                     <td>B</td>
                     <td>C</td>
                     <td>D</td>
-                    <td>答案</td>
                     <td>状态</td>
                     <td>操作</td>
                 </tr>
@@ -32,12 +31,12 @@
                     <td>{{exer.B}}</td>
                     <td>{{exer.C}}</td>
                     <td>{{exer.D}}</td>
-                    <td>{{exer.Answer}}</td>
                     <td>{{exer.Status}}</td>
                     <td class="text-center">
                         <button data-index="{{$index}}" class="btn btn-primary" edit-exercise>编辑</button>
                         <button data-index="{{$index}}" class="btn btn-success" view-exercise>查看</button>
                         <button data-index="{{$index}}" class="btn btn-danger" delete-exercise>删除</button>
+                        <button data-index="{{$index}}" class="btn btn-primary" change-exercise>发布</button>
                     </td>
                 </tr>
                 </tbody>
@@ -152,6 +151,24 @@
             </div>
             <div class="modal-footer clearfix">
                 <button class="btn btn-danger" ng-click="delete()" data-dismiss="modal">删除</button>
+                <button class="btn btn-default"  data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 modal-title>确认发布</h4>
+            </div>
+            <div class="modal-body">
+                请问，你是否确认要发布?
+            </div>
+            <div class="modal-footer clearfix">
+                <button class="btn btn-danger" ng-click="change()" data-dismiss="modal">发布</button>
                 <button class="btn btn-default"  data-dismiss="modal">取消</button>
             </div>
         </div>

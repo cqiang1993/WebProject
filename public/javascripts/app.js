@@ -14,6 +14,9 @@ angular.module('classApp',['ngRoute'])
         }).when('/exercise',{
             templateUrl:'pages/exercise.html',
             controller:'ExerCtrl'
+        }).when('/detail',{
+            templateUrl:'pages/detail.html',
+            controller:'DetailCtrl'
         }).otherwise({
             redirectTo:'/'
         });

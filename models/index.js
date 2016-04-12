@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema =mongoose.Schema;
-var ObjectId = Schema.ObjectId
+var ObjectId = Schema.ObjectId;
 exports.User = mongoose.model('User',new mongoose.Schema({
     username:String,
     password:String,
@@ -11,7 +11,9 @@ exports.Student = mongoose.model('Student',new mongoose.Schema({
     stuname:String,
     password:String,
     role:String,
-    teacher:String
+    teacher:String,
+    school:String,
+    specialty:String
 }));
 
 exports.Exercise = mongoose.model('Exercise',new mongoose.Schema({
@@ -23,4 +25,11 @@ exports.Exercise = mongoose.model('Exercise',new mongoose.Schema({
     Answer:String,
     Status:String,
     creator:String
+}));
+
+exports.Detail = mongoose.model('Detail',new mongoose.Schema({
+    questionId:String,
+    title:String,
+    stuId:String,
+    Answer:String
 }));

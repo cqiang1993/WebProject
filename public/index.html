@@ -2,7 +2,7 @@
 <html ng-app="classApp">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="./vendor/bootstrap/dist/css/bootstrap.css">
 </head>
 <body style="margin-top:70px">
@@ -16,6 +16,7 @@
         <li ng-hide="me" ng-class="{active:isActive('/login')}"><a href="#/login">登录</a></li>
         <li ng-show="me" ng-class="{active:isActive('/student')}"><a href="#/student">学生管理</a></li>
         <li ng-show="me" ng-class="{active:isActive('/exercise')}"><a href="#/exercise">习题管理</a></li>
+        <li ng-show="me" ng-class="{active:isActive('/detail')}"><a href="#/detail">详情</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="me">
         <li class="dropdown">
@@ -42,4 +43,5 @@
 <script src="./javascripts/controller/NavBarCtrl.js"></script>
 <script src="./javascripts/controller/StuCtrl.js"></script>
 <script src="./javascripts/controller/ExerCtrl.js"></script>
+<script src="./javascripts/controller/DetailCtrl.js"></script>
 </html>

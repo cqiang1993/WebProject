@@ -44,15 +44,7 @@ router.post('/logout',function(req,res){
 });
 
 
-router.get('/exerlist_online',function(req,res){
-    models.Exercise.find({Status:"online"},function(err,exers){
-        if(err){
-            res.status(500).json({msg:err});
-        }else{
-            res.status(200).json(exers);
-        }
-    })
-});
+
 
 router.get('/student_info',function(req,res){
     models.Exercise.find({_id:req.session.stuID},function(err,exers){

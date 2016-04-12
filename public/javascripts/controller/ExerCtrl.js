@@ -34,15 +34,30 @@ angular.module('classApp').controller('ExerCtrl',function($rootScope,$scope,$htt
             url:'/exers/deleteExer',
             method:'POST',
             data:$scope.exer
-        }).success(function (stu){
-            $scope.exers = $scope.exers.filter(function(stu){
+        }).success(function (exer){
+            $scope.exers = $scope.exers.filter(function(exer){
                 return exer._id != $scope.exer._id;
             })
         }).error(function(){
 
         })
-    }
-    });
+    };
+    $scope.change = function()
+    {
+        $http({
+            url:'/exers/changeExer_online',
+            method:'POST',
+            data:$scope.exer
+        }).success(function (exer){
+            $scope.exers.forEach(function (exer) {
+                if (exer._id = $scope.exer._id) {
+                    $scope.exer = exer;
+                }
+            });
+        }).error(function(){
+
+        })
+    }    });
 angular.module('classApp').directive('addExercise',function(){
     return {
         link:function(scope,element,attrs){
@@ -88,6 +103,19 @@ angular.module('classApp').directive('deleteExercise',function(){
                     scope.$parent.exer = scope.exers[attrs.index];
                 });
                 $('#deleteDialog').modal(true);
+            })
+        }
+    }
+});
+
+angular.module('classApp').directive('changeExercise',function(){
+    return {
+        link:function(scope,element,attrs){
+            element.click(function(){
+                scope.$apply(function(){
+                    scope.$parent.exer = scope.exers[attrs.index];
+                });
+                $('#changeDialog').modal(true);
             })
         }
     }

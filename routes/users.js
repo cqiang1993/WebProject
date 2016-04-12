@@ -68,7 +68,7 @@ router.post('/addStu',function(req,res){
             }
         })
     }else{
-        new models.Student({stuid:req.body.stuid,stuname:req.body.stuname,password:encrypt(req.body.password),role:'student',teacher:req.session.userID}).save(function(err,stu){
+        new models.Student({stuid:req.body.stuid,stuname:req.body.stuname,password:encrypt(req.body.password),role:'student',teacher:req.session.userID,school:"福州大学至诚学院",specialty:"计算机科学与技术"}).save(function(err,stu){
             if(err){
                 console.log(err);
                 res.status(500).json({msg:err});
@@ -81,7 +81,7 @@ router.post('/addStu',function(req,res){
 });
 
 router.get('/stulist',function(req,res){
-    models.Student.find({},function(err,stus){
+    models.Student.find({teacher:req.session.userID},function(err,stus){
         if(err){
             res.status(500).json({msg:err});
         }else{
