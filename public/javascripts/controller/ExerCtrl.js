@@ -133,6 +133,7 @@ angular.module('classApp').directive('selectAllExers',function(){
     }
 });
 
+
 angular.module('classApp').directive('selectExerItem',function(){
     return {
         link:function(scope,element,attrs){

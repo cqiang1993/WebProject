@@ -16,7 +16,7 @@ router.post('/addExer',function(req,res){
         })
     }else{
         new models.Exercise({title:req.body.title,A:req.body.A,B:req.body.B,C:req.body.C,D:req.body.D,
-            Answer:req.body.Answer,Status:req.body.Status,creator:req.session.userID}).save(function(err,stu){
+            Answer:req.body.Answer,Status:req.body.Status,creator:req.session.userID,CountA:0,CountB:0,CountC:0,CountD:0}).save(function(err,stu){
             if(err){
                 console.log(err);
                 res.status(500).json({msg:err});
@@ -95,23 +95,32 @@ router.post('/batchDeleteExers',function(req,res){
     });
 });
 
-router.post('/submit',function(req,res){
+router.post('/exist_submit',function(req,res){
     models.Detail.findOne({questionId:req.body.questionId,stuId:req.body.stuId},function(err,exer){
         if(err){
             res.status(500).json({msg:err});
         }else if(exer){
-                res.status(201).json({msg:"此题已完成",Answer:exer.Answer});
+            res.status(200).json({msg:"此题已完成",Answer:exer.Answer});
         }else{
-            new models.Detail({questionId:req.body.questionId,title:req.body.title,stuId:req.body.stuId,Answer:req.body.Answer}).save(function(err,detail){
-                if(err){
-                    console.log(err);
-                    res.status(500).json({msg:err});
-                }else{
-                    res.status(200).json(detail);
-                }
-            })
+            res.status(200).json({msg:"此题未完成"});
         }
-})
+    })
+});
+
+router.post('/submit',function(req,res) {
+    new models.Detail({
+        questionId: req.body.questionId,
+        title: req.body.title,
+        stuId: req.body.stuId,
+        Answer: req.body.Answer
+    }).save(function (err, detail) {
+        if (err) {
+            console.log(err);
+            res.status(500).json({msg: err});
+        } else {
+            res.status(200).json(detail);
+        }
+    });
 });
 
 module.exports = router;

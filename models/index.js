@@ -24,7 +24,11 @@ exports.Exercise = mongoose.model('Exercise',new mongoose.Schema({
     D:String,
     Answer:String,
     Status:String,
-    creator:String
+    creator:String,
+    CountA:Number,
+    CountB:Number,
+    CountC:Number,
+    CountD:Number
 }));
 
 exports.Detail = mongoose.model('Detail',new mongoose.Schema({
