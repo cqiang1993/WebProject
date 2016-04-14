@@ -23,7 +23,14 @@ angular.module('classApp').controller('StuCtrl',function($rootScope,$scope,$http
                         }
                     });
                 }
+                $http({
+                    url:'/users/stulist',
+                    method:'GET'
+                }).success(function (stus){
+                    $scope.stus = stus;
+                }).error(function(){
 
+                });
             }).error(function(){
 
             })

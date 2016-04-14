@@ -24,7 +24,14 @@ angular.module('classApp').controller('ExerCtrl',function($rootScope,$scope,$htt
                         }
                     });
                 }
+                $http({
+                    url:'/exers/exerlist',
+                    method:'GET'
+                }).success(function (exers){
+                    $scope.exers = exers;
+                }).error(function(){
 
+                });
             }).error(function(){
 
             })
@@ -37,22 +44,37 @@ angular.module('classApp').controller('ExerCtrl',function($rootScope,$scope,$htt
         }).success(function (exer){
             $scope.exers = $scope.exers.filter(function(exer){
                 return exer._id != $scope.exer._id;
-            })
+            });
+            $http({
+                url:'/exers/exerlist',
+                method:'GET'
+            }).success(function (exers){
+                $scope.exers = exers;
+            }).error(function(){
+
+            });
         }).error(function(){
 
         })
     };
-    $scope.change = function()
+    $scope.change = function(id)
     {
         $http({
             url:'/exers/changeExer_online',
             method:'POST',
-            data:$scope.exer
+            data:{_id:id}
         }).success(function (exer){
             $scope.exers.forEach(function (exer) {
                 if (exer._id = $scope.exer._id) {
                     $scope.exer = exer;
                 }
+            });
+            $http({
+                url:'/exers/exerlist',
+                method:'GET'
+            }).success(function (exers){
+                $scope.exers = exers;
+            }).error(function(){
 
             });
         }).error(function(){
