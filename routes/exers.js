@@ -6,8 +6,10 @@ var router = express.Router();
 router.post('/addExer',function(req,res){
     var id = req.body._id;
     if(id){
-        models.Exercise.update({_id:id},{$set:{title:req.body.title,A:req.body.A,B:req.body.B,C:req.body.C,D:req.body.D,
-            Answer:req.body.Answer,Status:req.body.Status,creator:req.session.userID}},{},function(err,stu){
+        models.Exercise.update({_id:id},{$set:{title:req.body.title,
+            A:req.body.A,B:req.body.B,C:req.body.C,D:req.body.D,
+            Answer:req.body.Answer,Status:req.body.Status,
+            creator:req.session.userID}},{},function(err,stu){
             if(err){
                 res.status(500).json({msg:err});
             }else{
@@ -15,8 +17,11 @@ router.post('/addExer',function(req,res){
             }
         })
     }else{
-        new models.Exercise({title:req.body.title,A:req.body.A,B:req.body.B,C:req.body.C,D:req.body.D,
-            Answer:req.body.Answer,Status:req.body.Status,creator:req.session.userID,CountA:0,CountB:0,CountC:0,CountD:0}).save(function(err,stu){
+        new models.Exercise({title:req.body.title,A:req.body.A,
+            B:req.body.B,C:req.body.C,D:req.body.D,
+            Answer:req.body.Answer,Status:req.body.Status,
+            creator:req.session.userID,CountA:0,CountB:0,
+            CountC:0,CountD:0}).save(function(err,stu){
             if(err){
                 console.log(err);
                 res.status(500).json({msg:err});
@@ -62,8 +67,14 @@ router.post('/changeExer_online',function(req,res){
     models.Exercise.update({_id:req.body._id},{$set:{Status:"online"}},function(err,result){
         if(err){
             res.status(500).json({msg:err});
-        }else{
-            res.status(200).json(result);
+        }else if(result){
+            models.Exercise.find({},function(err,exers){
+                if(err){
+                    res.status(500).json({msg:err});
+                }else{
+                    res.status(200).json(exers);
+                }
+            })
         }
     })
 });
@@ -96,7 +107,8 @@ router.post('/batchDeleteExers',function(req,res){
 });
 
 router.post('/exist_submit',function(req,res){
-    models.Detail.findOne({questionId:req.body.questionId,stuId:req.body.stuId},function(err,exer){
+    models.Detail.findOne({questionId:req.body.questionId,
+        stuId:req.body.stuId},function(err,exer){
         if(err){
             res.status(500).json({msg:err});
         }else if(exer){

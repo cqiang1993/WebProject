@@ -2,38 +2,32 @@ var mongoose = require('mongoose');
 var Schema =mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 exports.User = mongoose.model('User',new mongoose.Schema({
-    username:String,
-    password:String,
-    role:String
+    username:String,//教师用户名
+    password:String,//教师密码
+    role:String //角色:默认teacher
 }));
 exports.Student = mongoose.model('Student',new mongoose.Schema({
-    stuid:String,
-    stuname:String,
-    password:String,
-    role:String,
-    teacher:String,
-    school:String,
-    specialty:String
+    stuid:String,//学生学号
+    stuname:String,//学生姓名
+    password:String,//学生密码
+    role:String,//角色:默认student
+    teacher:String,//学生的老师
+    school:String,//学生的学校
+    specialty:String//专业
 }));
 
 exports.Exercise = mongoose.model('Exercise',new mongoose.Schema({
-    title:String,
-    A:String,
-    B:String,
-    C:String,
-    D:String,
-    Answer:String,
-    Status:String,
-    creator:String,
-    CountA:Number,
-    CountB:Number,
-    CountC:Number,
-    CountD:Number
+    title:String,//习题的题干
+    A:String, B:String, C:String, D:String, //选项
+    Answer:String, //答案
+    Status:String, //状态:wait和online
+    creator:String,//创建者
+    CountA:Number, CountB:Number, CountC:Number, CountD:Number//用于统计的
 }));
 
 exports.Detail = mongoose.model('Detail',new mongoose.Schema({
-    questionId:String,
-    title:String,
-    stuId:String,
-    Answer:String
+    questionId:String,//题目的id
+    title:String,//题干
+    stuId:String,//学生的学号
+    Answer:String//学生提交的答案
 }));

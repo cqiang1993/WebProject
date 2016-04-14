@@ -1,4 +1,4 @@
-angular.module('classApp').controller('DetailCtrl',function($rootScope,$scope,$http,$location){
+angular.module('classApp').controller('DetailCtrl',function($rootScope,$scope,$http,$state){
     $scope.exers = [];
         $http({
             url:'/exers/exerlist',
@@ -9,31 +9,33 @@ angular.module('classApp').controller('DetailCtrl',function($rootScope,$scope,$h
 
         });
 
-    $scope.refresh = function(){
+    $scope.refresh = function(id){
         $http({
             url:'/details/list_details',
             method:'POST',
-            data:$scope.exer
-        }).success(function (exer){
-            $scope.exers.forEach(function (exer) {
-                if (exer._id = $scope.exer._id) {
-                    $scope.exer = exer;
-                }
+            data:{"_id":id}
+        }).success(function (){
+            $http({
+                url:'/exers/exerlist',
+                method:'GET'
+            }).success(function (exers){
+                $scope.exers = exers;
+            }).error(function(){
+
             });
         }).error(function(){
-
-        })
+        });
     };
 });
 
-angular.module('classApp').directive('refreshDetails',function(){
-    return {
-        link:function(scope,element,attrs){
-            element.click(function(){
-                scope.$apply(function(){
-                    scope.$parent.exer = scope.exers[attrs.index];
-                });
-            })
-        }
-    }
-});
+//angular.module('classApp').directive('refreshDetails',function(){
+//    return {
+//        link:function(scope,element,attrs){
+//            element.click(function(){
+//                scope.$apply(function(){
+//                    scope.$parent.exer = scope.exers[attrs.index];
+//                });
+//            })
+//        }
+//    }
+//});

@@ -53,6 +53,7 @@ angular.module('classApp').controller('ExerCtrl',function($rootScope,$scope,$htt
                 if (exer._id = $scope.exer._id) {
                     $scope.exer = exer;
                 }
+
             });
         }).error(function(){
 

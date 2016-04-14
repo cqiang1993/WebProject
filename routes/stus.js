@@ -24,7 +24,8 @@ router.get('/validate',function(req,res){
 });
 
 router.post('/login',function(req,res){
-    models.Student.findOne({stuid: req.body.stuid, password: encrypt(req.body.password)},function(err,student){
+    models.Student.findOne({stuid: req.body.stuid,
+        password: encrypt(req.body.password)},function(err,student){
         if(err){
             res.status(500).json({msg:err});
         }else{
