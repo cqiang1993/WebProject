@@ -48,6 +48,14 @@ angular.module('classApp',['ui.router'])
                     controller:'DetailCtrl'
                 }
             }
+        }).state('/change',{
+            url:'/change',
+            views:{
+                '':{
+                    templateUrl:'pages/change.html',
+                    controller:'ChangeCtrl'
+                }
+            }
         })
     }).run(function($rootScope,$location,$http){
         $http({

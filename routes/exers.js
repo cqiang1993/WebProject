@@ -30,11 +30,10 @@ router.post('/addExer',function(req,res){
             }
         })
     }
-
 });
 
 router.get('/exerlist',function(req,res){
-    models.Exercise.find({},function(err,exers){
+    models.Exercise.find({creator:req.session.userID},function(err,exers){
         if(err){
             res.status(500).json({msg:err});
         }else{
@@ -43,8 +42,8 @@ router.get('/exerlist',function(req,res){
     })
 });
 
-router.get('/exerlist_online',function(req,res){
-    models.Exercise.find({Status:"online"},function(err,exers){
+router.post('/exerlist_online',function(req,res){
+    models.Exercise.find({Status:"online",creator:req.body.teacher},function(err,exers){
         if(err){
             res.status(500).json({msg:err});
         }else{

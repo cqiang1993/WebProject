@@ -117,6 +117,28 @@ router.post('/batchDeleteStus',function(req,res){
     });
 });
 
+router.post('/changePassword',function(req,res){
+    console.log(req.session.userID);
+    models.User.find({_id:req.session.userID,password:encrypt(req.body.old_password)},function(err,stu){
+        if(err){
+            res.status(500).json({msg:err});
+        }else if(stu != ""){
+            console.log(stu);
+            models.User.update({_id:req.session.userID},
+                {$set:{password:encrypt(req.body.password)}},
+                {},function(err,result){
+                    if(err){
+                        res.status(500).json({msg:err});
+                    }else{
+                        res.status(200).json({msg:"密码修改成功"});
+                    }
+                })
+        }else{
+            res.status(404).json({msg:"密码有误"});
+        }
+    })
+});
+
 
 
 module.exports = router;

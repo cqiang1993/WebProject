@@ -48,11 +48,34 @@ router.post('/logout',function(req,res){
 
 
 router.get('/student_info',function(req,res){
-    models.Exercise.find({_id:req.session.stuID},function(err,exers){
+    models.Student.find({_id:req.session.stuID},function(err,stu){
         if(err){
             res.status(500).json({msg:err});
         }else{
-            res.status(200).json(exers);
+            res.status(200).json(stu);
+        }
+    })
+});
+
+router.post('/changePassword',function(req,res){
+    console.log(req.body.stuid);
+    console.log(req.body);
+    models.Student.find({stuid:req.body.stuid,password:encrypt(req.body.password)},function(err,stu){
+        if(err){
+            res.status(500).json({msg:err});
+        }else if(stu != ""){
+            console.log(stu);
+            models.Student.update({stuid:req.body.stuid},
+                {$set:{password:encrypt(req.body.new_password)}},
+                {},function(err,result){
+                if(err){
+                    res.status(500).json({msg:err});
+                }else{
+                    res.status(200).json({msg:"密码修改成功"});
+                }
+            })
+        }else{
+            res.status(404).json({msg:"密码有误"});
         }
     })
 });

@@ -11,7 +11,6 @@
         <a ui-sref="/" class="navbar-brand">备课平台</a>
     </div>
     <ul class="nav navbar-nav">
-        <li ng-show="me" ng-class="{active:isActive('/home')}" ><a ui-sref="/">首页</a></li>
         <li ng-hide="me" ng-class="{active:isActive('/reg')}" ><a ui-sref="/reg">注册</a></li>
         <li ng-hide="me" ng-class="{active:isActive('/login')}" ><a ui-sref="/login">登录</a></li>
         <li ng-show="me" ng-class="{active:isActive('/student')}" ><a ui-sref="/student">学生管理</a></li>
@@ -20,10 +19,11 @@
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="me">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+            <a class="dropdown-toggle" data-toggle="dropdown"
                role="button">欢迎{{me.username}}<span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-left">
-                <li><a href="#" ng-click="logout()">退出</a> </li>
+                <li><a ng-click="logout()">退出</a></li>
+                <li><a ui-sref="/change" >修改密码</a></li>
             </ul>
         </li>
     </ul>
@@ -45,4 +45,5 @@
 <script src="./javascripts/controller/StuCtrl.js"></script>
 <script src="./javascripts/controller/ExerCtrl.js"></script>
 <script src="./javascripts/controller/DetailCtrl.js"></script>
+<script src="./javascripts/controller/ChangeCtrl.js"></script>
 </html>

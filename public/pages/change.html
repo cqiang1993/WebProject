@@ -1,0 +1,60 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">修改密码</div>
+        <div class="panel-body">
+            <form role="form" name="userform" class="form-horizontal" ng-submit="change()">
+                <div class="form-group row" ng-class="{'has-error':userform.old_password.$dirty&&userform.old_password.$invalid}">
+                    <label for="old_password" class="col-sm-offset-2 col-sm-2 control-label text-right">旧密码</label>
+                    <div class="input-group col-sm-4">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </div>
+                        <input type="password" id="old_password" name="old_password" ng-model="user.old_password" class="form-control"
+                               placeholder="请输入旧密码" ng-required/>
+                    </div>
+                    <div class="help-block col-sm-4" ng-show="userform.old_password.$dirty && userform.old_password.$invalid">
+                        <span class="text-danger" ng-show="userform.old_password.$error.required">请填写旧密码</span>
+                        <span class="text-danger" ng-show="userform.old_password.$error.minlength">长度不能小于6位</span>
+                        <span class="text-danger" ng-show="userform.old_password.$error.maxlength">长度不能大于12位</span>
+                    </div>
+                </div>
+                <div class="form-group row" ng-class="{'has-error':userform.password.$dirty&&userform.password.$invalid}">
+                    <label for="password" class="col-sm-offset-2 col-sm-2 control-label text-right">新密码</label>
+                    <div class="input-group col-sm-4">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </div>
+                        <input type="password" id="password" name="password" ng-model="user.password" class="form-control"
+                               placeholder="请输入6~12位密码" ng-minlength="6" ng-maxlength="12" ng-required/>
+                    </div>
+                    <div class="help-block col-sm-4" ng-show="userform.password.$dirty && userform.password.$invalid">
+                        <span class="text-danger" ng-show="userform.password.$error.required">请填写密码</span>
+                        <span class="text-danger" ng-show="userform.password.$error.minlength">长度不能小于6位</span>
+                        <span class="text-danger" ng-show="userform.password.$error.maxlength">长度不能大于12位</span>
+                    </div>
+                </div>
+                <div class="form-group row" ng-class="{'has-error':(userform.repassword.$dirty&&userform.repassword.$invalid)|| (userform.repassword.$dirty&&user.password!=user.repassword)}">
+                    <label for="repassword" class="col-sm-offset-2 col-sm-2 control-label text-right">请再次输入密码</label>
+                    <div class="input-group col-sm-4">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </div>
+                        <input type="password" id="repassword" name="repassword" ng-model="user.repassword" class="form-control"
+                               placeholder="请输入6~12位密码" ng-minlength="6" ng-maxlength="12" ng-required/>
+                    </div>
+                    <div class="help-block col-sm-4" ng-show="(userform.repassword.$dirty && userform.repassword.$invalid)">
+                        <span class="text-danger" ng-show="userform.repassword.$error.required">请填写重新输入</span>
+                        <span class="text-danger" ng-show="userform.repassword.$error.minlength">长度不能小于6位</span>
+                        <span class="text-danger" ng-show="userform.repassword.$error.maxlength">长度不能大于12位</span>
+                        <span class="text-danger" ng-show="(userform.repassword.$dirty&&user.password!=user.repassword)">密码和确认密码不一致</span>
+                    </div>
+                </div>
+                <div class="panel-footer clearfix" >
+                    <div class="col-sm-offset-5 col-sm-1">
+                        <button type="submit" class="btn btn-lg btn-primary btn-enter" ng-disabled="userform.$invalid || user.password!=user.repassword">确定</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
