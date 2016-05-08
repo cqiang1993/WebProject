@@ -9,26 +9,34 @@ router.post('/addExer',function(req,res){
         models.Exercise.update({_id:id},{$set:{title:req.body.title,
             A:req.body.A,B:req.body.B,C:req.body.C,D:req.body.D,
             Answer:req.body.Answer,Status:req.body.Status,
-            creator:req.session.userID}},{},function(err,stu){
+            creator:req.session.userID}},{},function(err,exer){
             if(err){
                 res.status(500).json({msg:err});
             }else{
-                res.status(200).json(stu);
+                res.status(200).json(exer);
             }
         })
     }else{
-        new models.Exercise({title:req.body.title,A:req.body.A,
-            B:req.body.B,C:req.body.C,D:req.body.D,
-            Answer:req.body.Answer,Status:req.body.Status,
-            creator:req.session.userID,CountA:0,CountB:0,
-            CountC:0,CountD:0}).save(function(err,stu){
+        models.User.find({_id:req.session.userID},function(err,tea){
             if(err){
                 console.log(err);
-                res.status(500).json({msg:err});
             }else{
-                res.status(200).json(stu);
+                tea = tea[0];
+                new models.Exercise({title:req.body.title,A:req.body.A,
+                    B:req.body.B,C:req.body.C,D:req.body.D,
+                    Answer:req.body.Answer,Status:"wait",
+                    creator:req.session.userID,school:tea.school,specialty:tea.specialty,course:tea.course,CountA:0,CountB:0,
+                    CountC:0,CountD:0}).save(function(err,exer){
+                        if(err){
+                            console.log(err);
+                            res.status(500).json({msg:err});
+                        }else{
+                            res.status(200).json(exer);
+                        }
+                    })
             }
         })
+
     }
 });
 
@@ -43,13 +51,26 @@ router.get('/exerlist',function(req,res){
 });
 
 router.post('/exerlist_online',function(req,res){
-    models.Exercise.find({Status:"online",creator:req.body.teacher},function(err,exers){
-        if(err){
-            res.status(500).json({msg:err});
-        }else{
-            res.status(200).json(exers);
-        }
-    })
+    if(req.body.course == 'all'){
+        models.Exercise.find({Status:"online",school:req.body.school,
+            specialty:req.body.specialty},function(err,exers){
+            if(err){
+                res.status(500).json({msg:err});
+            }else{
+                res.status(200).json(exers);
+            }
+        })
+    }else{
+        models.Exercise.find({Status:"online",school:req.body.school,
+            specialty:req.body.specialty,course:req.body.course},function(err,exers){
+            if(err){
+                res.status(500).json({msg:err});
+            }else{
+                res.status(200).json(exers);
+            }
+        })
+    }
+
 });
 
 router.post('/exerdetail_online',function(req,res){

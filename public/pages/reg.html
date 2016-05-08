@@ -47,6 +47,40 @@
                         <span class="text-danger" ng-show="(userform.repassword.$dirty&&user.password!=user.repassword)">密码和确认密码不一致</span>
                     </div>
                 </div>
+                <div class="form-group row" ng-class="{'has-error':userform.school.$dirty&&userform.school.$invalid}">
+                <label for="school" class="col-sm-offset-2 col-sm-2 control-label text-right">学校</label>
+                <div class="input-group col-sm-4">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </div>
+                    <input type="text" id="school" name="school" ng-model="user.school" class="form-control"
+                           placeholder="请输入所属学校" ng-required/>
+                    </div>
+                </div>
+                <div class="form-group row" ng-class="{'has-error':userform.specialty.$dirty&&userform.specialty.$invalid}">
+                    <label for="specialty" class="col-sm-offset-2 col-sm-2 control-label text-right">专业</label>
+                    <div class="input-group col-sm-4">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-book"></span>
+                        </div>
+                        <input type="text" id="specialty" name="specialty" ng-model="user.specialty" class="form-control"
+                               placeholder="请输入所属专业" ng-required/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-offset-2 col-sm-2 control-label text-right">科目</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="course" value="语文" ng-model="user.course" checked="checked">语文
+                            </label>
+                            <label>
+                                <input type="radio" name="course" value="数学" ng-model="user.course">数学
+                            </label>
+                            <label>
+                                <input type="radio" name="course" value="英语" ng-model="user.course">英语
+                            </label>
+                        </div>
+                </div>
                 <div class="panel-footer clearfix" >
                     <div class="col-sm-offset-5 col-sm-1">
                         <button type="submit" class="btn btn-lg btn-primary btn-enter" ng-disabled="userform.$invalid || user.password!=user.repassword">注册</button>

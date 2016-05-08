@@ -25,8 +25,10 @@ router.get('/validate',function(req,res){
 
 router.post('/reg',function(req,res){
     var user = req.body;
+    console.log(user);
     if(user.password == user.repassword){
-        new models.User({username:user.username,password:encrypt(user.password),role:"teacher"}).save(function(err,result){
+        new models.User({username:user.username,password:encrypt(user.password),role:"teacher",course:user.course
+        ,school:user.school,specialty:user.specialty}).save(function(err,result){
             if(err){
                 res.json(500,{msg:err});
             }else{
@@ -68,26 +70,42 @@ router.post('/addStu',function(req,res){
             }
         })
     }else{
-        new models.Student({stuid:req.body.stuid,stuname:req.body.stuname,password:encrypt(req.body.password),role:'student',teacher:req.session.userID,school:"福州大学至诚学院",specialty:"计算机科学与技术"}).save(function(err,stu){
+        models.User.find({_id:req.session.userID},function(err,tea){
             if(err){
                 console.log(err);
-                res.status(500).json({msg:err});
             }else{
-                res.status(200).json(stu);
+                tea = tea[0];
+                new models.Student({stuid:req.body.stuid,stuname:req.body.stuname,password:encrypt(req.body.password),role:'student',school:tea.school,specialty:tea.specialty}).save(function(err,stu){
+                    if(err){
+                        console.log(err);
+                        res.status(500).json({msg:err});
+                    }else{
+                        res.status(200).json(stu);
+                    }
+                })
             }
         })
+
     }
 
 });
 
 router.get('/stulist',function(req,res){
-    models.Student.find({teacher:req.session.userID},function(err,stus){
-        if(err){
-            res.status(500).json({msg:err});
-        }else{
-            res.status(200).json(stus);
-        }
-    })
+    models.User.find({_id:req.session.userID},function(err,tea){
+       if(err){
+           console.log(err)
+       }else{
+           tea = tea[0];
+           models.Student.find({school:tea.school,specialty:tea.specialty},function(err,stus){
+               if(err){
+                   res.status(500).json({msg:err});
+               }else{
+                   res.status(200).json(stus);
+               }
+           })
+       }
+    });
+
 });
 
 router.post('/deleteStu',function(req,res){
