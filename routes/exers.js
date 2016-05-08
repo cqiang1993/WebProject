@@ -5,6 +5,7 @@ var router = express.Router();
 
 router.post('/addExer',function(req,res){
     var id = req.body._id;
+    console.log(req.body);
     if(id){
         models.Exercise.update({_id:id},{$set:{title:req.body.title,
             A:req.body.A,B:req.body.B,C:req.body.C,D:req.body.D,
@@ -51,6 +52,7 @@ router.get('/exerlist',function(req,res){
 });
 
 router.post('/exerlist_online',function(req,res){
+    console.log(req.body);
     if(req.body.course == 'all'){
         models.Exercise.find({Status:"online",school:req.body.school,
             specialty:req.body.specialty},function(err,exers){
