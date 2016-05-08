@@ -27,14 +27,26 @@ router.post('/reg',function(req,res){
     var user = req.body;
     console.log(user);
     if(user.password == user.repassword){
-        new models.User({username:user.username,password:encrypt(user.password),role:"teacher",course:user.course
-        ,school:user.school,specialty:user.specialty}).save(function(err,result){
-            if(err){
-                res.json(500,{msg:err});
-            }else{
-                res.json(result);
-            }
-        })
+        if(user.course){
+            new models.User({username:user.username,password:encrypt(user.password),role:"teacher",course:user.course
+                ,school:user.school,specialty:user.specialty}).save(function(err,result){
+                    if(err){
+                        res.json(500,{msg:err});
+                    }else{
+                        res.json(result);
+                    }
+                })
+        }else{
+            new models.User({username:user.username,password:encrypt(user.password),role:"teacher",course:"语文"
+                ,school:user.school,specialty:user.specialty}).save(function(err,result){
+                    if(err){
+                        res.json(500,{msg:err});
+                    }else{
+                        res.json(result);
+                    }
+                })
+        }
+
     }
 });
 
