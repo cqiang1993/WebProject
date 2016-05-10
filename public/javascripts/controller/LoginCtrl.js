@@ -13,7 +13,8 @@ angular.module('classApp').controller('LoginCtrl',function($rootScope,$scope,$ht
             $rootScope.me = user;
             $location.path('/home');
         }).error(function(){
-            $location.path('/login');
+            alert('用户名或密码错误，请确认后输入！');
+            return false;
         });}
 
     }
