@@ -5,12 +5,10 @@ var router = express.Router();
 
 router.post('/addExer',function(req,res){
     var id = req.body._id;
-    console.log(req.body);
     if(id){
         models.Exercise.update({_id:id},{$set:{title:req.body.title,
             A:req.body.A,B:req.body.B,C:req.body.C,D:req.body.D,
-            Answer:req.body.Answer,Status:req.body.Status,
-            creator:req.session.userID}},{},function(err,exer){
+            Answer:req.body.Answer}},{},function(err,exer){
             if(err){
                 res.status(500).json({msg:err});
             }else{
@@ -23,18 +21,33 @@ router.post('/addExer',function(req,res){
                 console.log(err);
             }else{
                 tea = tea[0];
-                new models.Exercise({title:req.body.title,A:req.body.A,
-                    B:req.body.B,C:req.body.C,D:req.body.D,
-                    Answer:req.body.Answer,Status:"wait",
-                    creator:req.session.userID,school:tea.school,specialty:tea.specialty,course:tea.course,CountA:0,CountB:0,
-                    CountC:0,CountD:0}).save(function(err,exer){
-                        if(err){
-                            console.log(err);
-                            res.status(500).json({msg:err});
-                        }else{
-                            res.status(200).json(exer);
-                        }
-                    })
+				if(req.body.Answer){
+					new models.Exercise({title:req.body.title,A:req.body.A,
+						B:req.body.B,C:req.body.C,D:req.body.D,
+						Answer:req.body.Answer,Status:"wait",
+						creator:req.session.userID,school:tea.school,specialty:tea.specialty,course:tea.course,CountA:0,CountB:0,
+						CountC:0,CountD:0}).save(function(err,exer){
+							if(err){
+								console.log(err);
+								res.status(500).json({msg:err});
+							}else{
+								res.status(200).json(exer);
+							}
+						})				
+				}else{
+					new models.Exercise({title:req.body.title,A:req.body.A,
+							B:req.body.B,C:req.body.C,D:req.body.D,
+							Answer:"A",Status:"wait",
+							creator:req.session.userID,school:tea.school,specialty:tea.specialty,course:tea.course,CountA:0,CountB:0,
+							CountC:0,CountD:0}).save(function(err,exer){
+								if(err){
+									console.log(err);
+									res.status(500).json({msg:err});
+								}else{
+									res.status(200).json(exer);
+								}
+							})		
+				}            
             }
         })
 
