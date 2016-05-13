@@ -29,11 +29,11 @@ angular.module('classApp').controller('StuCtrl',function($rootScope,$scope,$http
                 }).success(function (stus){
                     $scope.stus = stus;
                 }).error(function(){
-                    alert('该学号已存在,请重新输入');
-                    return false;
+
                 });
             }).error(function(){
-
+                alert('该学号已存在,请重新输入');
+                return false;
             })
         };
     $scope.delete = function(){
