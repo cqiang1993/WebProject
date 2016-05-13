@@ -16,7 +16,8 @@ angular.module('classApp').controller('RegCtrl',function($scope,$http,$location)
             }).success(function(user){
                 $location.path('/login');
             }).error(function(){
-                $location.path('/reg');
+                alert("用户名已存在,请重新输入")
+                return false
             })
         }
     }
