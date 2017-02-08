@@ -1,0 +1,25 @@
+{
+  "name": "beike",
+  "description": "备课",
+  "main": "",
+  "authors": [
+    "cqiang1993 <cqiang1993@163.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/cqiang1993/WebProject",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6"
+  }
+}
